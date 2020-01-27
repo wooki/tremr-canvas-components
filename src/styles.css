@@ -1,0 +1,34 @@
+.container {
+  border: 5px solid black;
+  position: relative;
+  width: 400px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reputation-avatar {
+  flex: 0 1 260px;
+  /* border: 1px dotted red; */
+  height: 260px;
+  max-height: 260px;
+  width: 260px;
+  transform: translateY(-260px);
+}
+.reputation-avatar canvas {
+  height: 260px;
+  width: 260px;
+}
+
+.reputation-dial {
+  flex: 0 1 100%;
+  /* border: 1px dotted cyan; */
+  height: 270px;
+  max-height: 270px;
+  width: 100%;
+}
+
+.reputation-dial canvas {
+  height: 270px;
+  width: 100%;
+}
