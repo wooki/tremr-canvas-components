@@ -46,7 +46,7 @@ module.exports = CreateReactClass({
   componentDidMount: function() {
     // https://placeimg.com/480/480/keyword
     this.imgElement = document.createElement("img");
-    this.imgElement.src = "https://placeimg.com/400/400/sample";
+    this.imgElement.src = this.props.avatar;
     this.imgElement.addEventListener("load", this.handleImageLoad);
     this.imgElement.addEventListener("error", this.handleImageError);
   },

@@ -1,20 +1,23 @@
 let React = require("react");
+let ReactDOM = require("react-dom");
 let CreateReactClass = require("create-react-class");
-let Avatar = require("./avatar");
+let Gauge = require("./gauge");
 
 module.exports = CreateReactClass({
   getDefaultProps: function() {
     return {
-      reputation: 0, // %
+      percent: 0, // %
       time: 500, // ms,
       delay: 0,
-      scale: 1
+      scale: 1,
+      icon: "shield",
+      color: "#379DE8"
     };
   },
 
   getInitialState: function() {
     return {
-      reputation: 0,
+      percent: 0,
       lastFrame: null,
       delayed: 0
     };
@@ -30,7 +33,7 @@ module.exports = CreateReactClass({
 
   updateAnimationState: function(timestamp) {
     // console.log("x:" + timestamp);
-    let newReputation = this.state.reputation;
+    let newPercent = this.state.percent;
     let progress = 0;
     let delayed = this.state.delayed;
 
@@ -40,29 +43,34 @@ module.exports = CreateReactClass({
       if (this.props.delay > this.state.delayed) {
         delayed = delayed + progress;
       } else {
-        newReputation =
-          newReputation + this.props.reputation / (this.props.time / progress);
+        newPercent =
+          newPercent + this.props.percent / (this.props.time / progress);
       }
     }
     this.setState({
-      reputation: newReputation,
+      percent: newPercent,
       lastFrame: timestamp,
       delayed: delayed
     });
 
     // only request new frame if we haven't finished
-    if (newReputation <= this.props.reputation) {
+    if (newPercent <= this.props.percent) {
       this.rAF = requestAnimationFrame(this.updateAnimationState);
     }
   },
 
   render: function() {
-    // console.log("rep:" + this.state.reputation);
+    // if (this.state.width == null) {
+    //   return <div className="reputation-dial" />;
+    // }
     return (
-      <Avatar
-        avatar={this.props.avatar}
+      <Gauge
         scale={this.props.scale}
-        reputation={this.state.reputation}
+        percent={this.state.percent}
+        color={this.props.color}
+        icon={this.props.icon}
+        height={this.state.height}
+        width={this.state.width}
       />
     );
   }

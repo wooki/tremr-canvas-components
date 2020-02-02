@@ -6,6 +6,9 @@ let CreateReactClass = require("create-react-class");
 let Avatar = require("./reputation/animatedavatar");
 // let Dial = require("./reputation/dial");
 let Dial = require("./reputation/animateddial");
+let Gauge = require("./reputation/animatedgauge");
+let LineGraph = require("./reputation/animatedlinegraph");
+let BarChart = require("./reputation/animatedbarchart");
 
 module.exports = CreateReactClass({
   getQueryVariable: function(variable) {
@@ -23,6 +26,9 @@ module.exports = CreateReactClass({
   render: function() {
     console.log("window.devicePixelRatio:" + window.devicePixelRatio);
     let reputation = parseFloat(this.getQueryVariable("r"));
+    let trust = parseFloat(this.getQueryVariable("t") || 50);
+    let respect = parseFloat(this.getQueryVariable("rsp") || 50);
+
     let reputationStars = [10, 20, 30];
     let avatarReputation = 0;
     if (reputation < 10) {
@@ -51,6 +57,99 @@ module.exports = CreateReactClass({
             reputation={avatarReputation}
             time={600}
             delay={600}
+            avatar="/avatar-tr.png"
+          />
+          <Gauge
+            scale={1}
+            percent={trust}
+            time={600}
+            delay={600}
+            color="#379DE8"
+            icon="shield"
+          />
+          <Gauge
+            scale={window.devicePixelRatio}
+            percent={respect}
+            time={600}
+            delay={600}
+            color="#93CC58"
+            icon="heart"
+          />
+          <LineGraph
+            lineWidth={4}
+            values={[
+              8,
+              15,
+              18,
+              20,
+              28,
+              13,
+              21,
+              6,
+              22,
+              7,
+              10,
+              6,
+              14,
+              16,
+              17,
+              11,
+              9,
+              16,
+              26,
+              19,
+              23,
+              4,
+              30,
+              8,
+              24,
+              12,
+              2,
+              14,
+              25,
+              22
+            ]}
+            time={600}
+            delay={600}
+            scale={window.devicePixelRatio}
+          />
+          <BarChart
+            barWidth={1}
+            values={[
+              8,
+              15,
+              18,
+              20,
+              28,
+              13,
+              21,
+              6,
+              22,
+              7,
+              10,
+              6,
+              14,
+              16,
+              17,
+              11,
+              9,
+              16,
+              26,
+              19,
+              23,
+              4,
+              30,
+              8,
+              24,
+              12,
+              2,
+              14,
+              25,
+              22
+            ]}
+            time={600}
+            delay={600}
+            scale={window.devicePixelRatio}
           />
         </div>
       </div>
