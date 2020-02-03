@@ -1,24 +1,21 @@
 let React = require("react");
 let ReactDOM = require("react-dom");
 let CreateReactClass = require("create-react-class");
-let Gauge = require("./gauge");
+let Stars = require("./stars");
 
 module.exports = CreateReactClass({
   getDefaultProps: function() {
     return {
-      percent: 0, // %
-      allowNegative: false,
+      stars: 0, // 0, 1, 2 or 3
       time: 500, // ms,
       delay: 0,
-      scale: 1,
-      icon: "shield",
-      color: "#379DE8"
+      scale: 1
     };
   },
 
   getInitialState: function() {
     return {
-      percent: 0,
+      stars: 0,
       lastFrame: null,
       delayed: 0
     };
@@ -26,6 +23,14 @@ module.exports = CreateReactClass({
 
   componentDidMount: function() {
     this.rAF = requestAnimationFrame(this.updateAnimationState);
+
+    let node = ReactDOM.findDOMNode(this);
+    if (node && node.clientWidth !== this.state.width) {
+      this.setState({
+        width: node.clientWidth,
+        height: node.clientHeight
+      });
+    }
   },
 
   componentWillUnmount: function() {
@@ -33,8 +38,7 @@ module.exports = CreateReactClass({
   },
 
   updateAnimationState: function(timestamp) {
-    // console.log("x:" + timestamp);
-    let newPercent = this.state.percent;
+    let newStars = this.state.stars;
     let progress = 0;
     let delayed = this.state.delayed;
 
@@ -44,38 +48,33 @@ module.exports = CreateReactClass({
       if (this.props.delay > this.state.delayed) {
         delayed = delayed + progress;
       } else {
-        newPercent =
-          newPercent + this.props.percent / (this.props.time / progress);
+        newStars = newStars + this.props.stars / (this.props.time / progress);
       }
     }
+
+    console.log("stars:" + newStars);
     this.setState({
-      percent: newPercent,
+      stars: newStars,
       lastFrame: timestamp,
       delayed: delayed
     });
 
     // only request new frame if we haven't finished
-    if (
-      (this.props.percent > 0 && newPercent < this.props.percent) ||
-      (this.props.percent < 0 && newPercent > this.props.percent)
-    ) {
+    if (newStars <= this.props.stars) {
       this.rAF = requestAnimationFrame(this.updateAnimationState);
     }
   },
 
   render: function() {
-    // if (this.state.width == null) {
-    //   return <div className="reputation-dial" />;
-    // }
+    if (this.state.width == null) {
+      return <div className="reputation-stars" />;
+    }
     return (
-      <Gauge
-        scale={this.props.scale}
-        percent={this.state.percent}
-        allowNegative={this.props.allowNegative}
-        color={this.props.color}
-        icon={this.props.icon}
+      <Stars
         height={this.state.height}
         width={this.state.width}
+        stars={this.state.stars}
+        scale={this.props.scale}
       />
     );
   }

@@ -7,6 +7,7 @@ module.exports = CreateReactClass({
     return {
       percent: 0, // %
       scale: 1,
+      allowNegative: false,
       icon: "shield",
       color: "#379DE8",
       icons: {
@@ -86,6 +87,12 @@ module.exports = CreateReactClass({
     // draw the indicator triangle
     let triangleZeroAngle = -125 * (Math.PI / 180);
     let triangleOneHundredAngle = 125 * (Math.PI / 180);
+
+    if (this.props.allowNegative) {
+      triangleZeroAngle = 0;
+      triangleOneHundredAngle = 125 * (Math.PI / 180);
+    }
+
     let triangleAngle =
       triangleZeroAngle +
       (triangleOneHundredAngle - triangleZeroAngle) * this.props.percent * 0.01;

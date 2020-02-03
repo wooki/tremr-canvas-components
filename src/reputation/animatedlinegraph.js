@@ -63,9 +63,9 @@ module.exports = CreateReactClass({
 
           // scale away from average towards value
           if (v > avValue) {
-            return avValue + (avValue - v) * (percentComplete / 100);
+            return avValue + (v - avValue) * (percentComplete / 100);
           } else {
-            return avValue - (v - avValue) * (percentComplete / 100);
+            return avValue - (avValue - v) * (percentComplete / 100);
           }
         });
       }

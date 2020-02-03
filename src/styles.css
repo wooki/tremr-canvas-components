@@ -1,25 +1,44 @@
 .container {
-  border: 5px solid black;
-  position: relative;
+  border: 1px solid #999;
   width: 400px;
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: block;
 }
+.reputation-dashboard {
+  /* background: #bada5599; */
+}
+.reputation-dashboard-title {
+  font-family: "Lato", sans-serif;
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 700;
+  flex: 1 1 auto;
+  display: block;
+  text-align: left;
+  width: 100%;
+  margin: 15px 0 0 15px;
+}
+.reputation-dashboard-top {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 270px;
+  max-height: 270px;
+}
+
 .reputation-avatar {
-  flex: 0 1 260px;
   height: 260px;
   max-height: 260px;
   width: 260px;
+  margin-left: 50%;
+  margin-top: 5px;
   position: absolute;
   top: 0;
+  transform: translateX(-50%);
 }
 .reputation-avatar canvas {
   height: 260px;
   width: 260px;
 }
-
 .reputation-dial {
   flex: 0 1 100%;
   height: 270px;
@@ -32,16 +51,72 @@
   width: 100%;
 }
 
+.reputation-dashboard-middle {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 140px;
+  max-height: 140px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .reputation-gauge {
-  flex: 0 1 100%;
+  flex: 0 1 100px;
   height: 80px;
   max-height: 80px;
   width: 80px;
+  text-align: center;
 }
 
 .reputation-gauge canvas {
   height: 80px;
   width: 80px;
+}
+
+.reputation-info {
+  flex: 0 0 100px;
+  height: 140px;
+  max-height: 140px;
+  width: 140px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.reputation-stars {
+  width: 100px;
+  height: 25px;
+  text-align: center;
+}
+
+.reputation-stars canvas {
+  width: 100px;
+  height: 25px;
+}
+
+.reputation-stars {
+  width: 100px;
+  height: 25px;
+  text-align: center;
+}
+
+.reputation-membership {
+  height: 26px;
+  line-height: 26px;
+  border-radius: 13px;
+  max-width: auto;
+  margin: 12px 15px 12px 15px;
+  background: #fbac01;
+  color: white;
+  text-transform: uppercase;
+  padding: 0 15px;
+  font-family: "Lato", sans-serif;
+  font-size: 12px;
+  font-weight: 700px;
 }
 
 .reputation-linegraph {
