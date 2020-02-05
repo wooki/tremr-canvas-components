@@ -10,6 +10,7 @@ module.exports = CreateReactClass({
       allowNegative: false,
       icon: "shield",
       color: "#379DE8",
+      title: "Trust",
       icons: {
         shield:
           "M0,3.40092018 C2.69363096,3.21522482 4.65537665,2.93131518 5.88523707,2.54919123 C7.11509749,2.16706729 8.80195607,1.31733688 10.9458128,0 C13.2159803,1.31019079 14.9836963,2.1599212 16.2489609,2.54919123 C17.5142255,2.93846127 19.4312385,3.22237092 22,3.40092018 L22,10.5007775 C21.9505497,13.5296906 20.8271532,16.027155 18.6298107,17.9931708 C17.0425775,19.4133068 14.4812449,20.7489166 10.9458128,22 C7.58816173,20.9477816 5.04573818,19.6121719 3.31854218,17.9931708 C1.10618073,15.919396 0,13.4219315 0,10.5007775 L0,3.40092018 Z",
@@ -131,12 +132,17 @@ module.exports = CreateReactClass({
   render: function() {
     // console.log("testcanvas render");
     return (
-      <div className="reputation-gauge">
+      <div className={"reputation-gauge " + this.props.icon}>
         <PureCanvas
           height={80 * this.props.scale}
           width={80 * this.props.scale}
           contextRef={this.saveCtx}
         />
+        <div className="reputation-gauge-title">{this.props.title}</div>
+        <div className="reputation-gauge-score">
+          {Math.round(this.props.percent) > 0 ? "+" : ""}
+          {Math.round(this.props.percent)}
+        </div>
       </div>
     );
   }

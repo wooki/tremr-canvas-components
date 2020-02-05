@@ -25,6 +25,41 @@ module.exports = CreateReactClass({
   },
 
   render: function() {
+    let reputationChange = 0;
+    if (this.props.reputationValues.length > 1) {
+      reputationChange =
+        this.props.reputation -
+        this.props.reputationValues[this.props.reputationValues.length - 2];
+    }
+
+    // figure out how many stars
+    let stars = 0;
+    if (this.props.reputation >= this.props.stars[0]) {
+      stars++;
+    }
+    if (this.props.reputation >= this.props.stars[1]) {
+      stars++;
+    }
+    if (this.props.reputation >= this.props.stars[2]) {
+      stars++;
+    }
+
+    let percentTowardsNextStar = 0;
+    if (this.props.reputation >= this.props.stars[2]) {
+      percentTowardsNextStar = 100;
+    } else if (this.props.reputation >= this.props.stars[1]) {
+      percentTowardsNextStar =
+        (100 * (this.props.reputation - this.props.stars[1])) /
+        (this.props.stars[2] - this.props.stars[1]);
+    } else if (this.props.reputation >= this.props.stars[0]) {
+      percentTowardsNextStar =
+        (100 * (this.props.reputation - this.props.stars[0])) /
+        (this.props.stars[1] - this.props.stars[0]);
+    } else {
+      percentTowardsNextStar =
+        (100 * this.props.reputation) / this.props.stars[0];
+    }
+
     return (
       <div className="reputation-dashboard">
         <div className="reputation-dashboard-title">{this.props.title}</div>
@@ -38,7 +73,7 @@ module.exports = CreateReactClass({
           />
           <Avatar
             scale={window.devicePixelRatio}
-            reputation={this.props.reputation}
+            reputation={percentTowardsNextStar}
             time={this.props.time}
             delay={this.props.delay}
             avatar={this.props.avatarUrl}
@@ -53,13 +88,16 @@ module.exports = CreateReactClass({
             delay={this.props.delay}
             color="#379DE8"
             icon="shield"
+            title="Trust"
           />
           <div className="reputation-info">
-            <Stars scale={window.devicePixelRatio} stars={3} />
+            <Stars scale={window.devicePixelRatio} stars={stars} />
             <Membership
               reputation={this.props.reputation}
               stars={this.props.stars}
             />
+            <div className="reputation-score">{this.props.reputation}</div>
+            {/* <div className="reputation-change">{reputationChange}</div> */}
           </div>
           <Gauge
             scale={window.devicePixelRatio}
@@ -69,6 +107,7 @@ module.exports = CreateReactClass({
             delay={this.props.delay}
             color="#93CC58"
             icon="heart"
+            title="Respect"
           />
         </div>
         <LineGraph

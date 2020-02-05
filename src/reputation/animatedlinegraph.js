@@ -39,6 +39,18 @@ module.exports = CreateReactClass({
     cancelAnimationFrame(this.rAF);
   },
 
+  componentDidUpdate: function() {
+    if (this.rAF === null) {
+      this.setState({
+        values: [],
+        percentComplete: 0,
+        lastFrame: null,
+        delayed: 0
+      });
+      this.rAF = requestAnimationFrame(this.updateAnimationState);
+    }
+  },
+
   updateAnimationState: function(timestamp) {
     let newValues = this.state.values;
     let percentComplete = this.state.percentComplete;
@@ -79,6 +91,8 @@ module.exports = CreateReactClass({
     // only request new frame if we haven't finished
     if (percentComplete < 100) {
       this.rAF = requestAnimationFrame(this.updateAnimationState);
+    } else {
+      this.rAF = null;
     }
   },
 

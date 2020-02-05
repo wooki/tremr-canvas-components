@@ -1,0 +1,293 @@
+/* page layout */
+.page {
+  display: block;
+  
+  .section {
+    display: block;
+  }
+
+  h1 {
+    font-family: "Lato", sans-serif;
+    font-size: 26px;
+    line-height: 32px;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-family: "Lato", sans-serif;
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 700;
+    color: #C58700;
+  }
+
+  p {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    color: #C58700;
+    margin: 10px 0 10px 0;
+  }  
+}
+
+@media only screen and (min-width: 1170px) {
+  .page {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .section {
+      flex: 1 1 auto;     
+      margin-left: 30px; 
+    }
+    .section + .section {
+      margin-left: 50px;
+    }
+  }
+}
+
+/* variables */
+.data-input {
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+  .field {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 0 10px 0;
+
+    label {
+      color: #C58700;
+      font-size: 18px;
+      line-height: 24px;
+      flex: 0 0 140px;      
+      margin-right: 10px;
+    }
+
+    input {
+      font-size: 18px;
+      line-height: 24px;
+      flex: 0 0 50px;      
+      background-color: #F9F9F9;
+      border: 1px solid #979797;
+      padding: 0 5px;
+      max-width: 140px;
+
+      &[type=number] {
+        max-width: 50px;
+        padding: 0;
+        text-align: right;
+      }
+    }
+
+    .info {
+      color: #C58700;
+      font-size: 14px;
+      line-height: 16px;
+      flex: 1 0 auto;  
+      margin-left: 10px;    
+    }
+  }
+
+  &.historicals {
+    .field {
+      input + input {        
+        margin-left: 10px;
+      }
+    }
+  }
+  
+}
+
+/* UX */
+.container {
+  border: 1px solid #999;
+  width: 400px;
+  display: block;
+}
+.reputation-dashboard {
+
+  .reputation-dashboard-title {
+    font-family: "Lato", sans-serif;
+    font-size: 26px;
+    line-height: 32px;
+    font-weight: 700;
+    flex: 1 1 auto;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 15px 0 0 15px;
+  }
+  .reputation-dashboard-top {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 270px;
+    max-height: 270px;
+  }
+
+  .reputation-avatar {
+    height: 260px;
+    max-height: 260px;
+    width: 260px;
+    margin-left: 50%;
+    margin-top: 5px;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+
+    canvas {
+      height: 260px;
+      width: 260px;
+    }
+  }
+  
+  .reputation-dial {
+    flex: 0 1 100%;
+    height: 270px;
+    max-height: 270px;
+    width: 100%;
+
+    canvas {
+      height: 270px;
+      width: 100%;
+    }
+  }
+
+  .reputation-dashboard-middle {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 140px;
+    max-height: 140px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .reputation-gauge {
+    flex: 0 1 100px;
+    height: 120px;
+    max-height: 120px;
+    width: 80px;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 700px;
+    letter-spacing: -0.26px;
+  
+    &.shield {
+      color: #379de8;
+    }
+    &.heart {
+      color: #93cc58;
+    }
+
+    canvas {
+      height: 80px;
+      width: 80px;
+      margin: 0;
+    }
+
+    .reputation-gauge-title {
+      margin: 0;
+      text-transform: uppercase;
+    }
+  
+    .reputation-gauge-score {
+      font-size: 12px;
+      line-height: 16px;
+      margin: 0;
+    }
+  }
+
+  .reputation-info {
+    flex: 0 0 100px;
+    height: 140px;
+    max-height: 140px;
+    width: 140px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .reputation-stars {
+    width: 100px;
+    height: 25px;
+    text-align: center;
+    margin-top: 2px;
+
+    canvas {
+      width: 100px;
+      height: 25px;
+    }
+  }
+
+  .reputation-membership {
+    height: 26px;
+    line-height: 26px;
+    border-radius: 13px;
+    max-width: auto;
+    margin: 12px 15px 9px 15px;
+    background: #fbac01;
+    color: white;
+    text-transform: uppercase;
+    padding: 0 15px;
+    font-family: "Lato", sans-serif;
+    font-size: 12px;
+    font-weight: 700px;
+    letter-spacing: -0.22px;
+  }
+
+  .reputation-score {
+    font-family: "Lato", sans-serif;
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  .reputation-change {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+    color: #fbac01;
+  }
+
+  .reputation-linegraph {
+    flex: 0 1 100%;
+    height: 125px;
+    max-height: 125px;
+    width: 100%;
+
+    canvas {
+      height: 125px;
+      width: 100%;
+    }
+  }
+
+  .reputation-barchart {
+    flex: 0 1 100%;
+    height: 18px;
+    max-height: 18px;
+    width: 100%;
+
+    canvas {
+      height: 18px;
+      width: 100%;
+    }
+  }  
+}

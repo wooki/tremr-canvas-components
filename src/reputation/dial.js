@@ -129,21 +129,21 @@ module.exports = CreateReactClass({
         // draw number only for 1+
         if (i >= 1) {
           if (this.props.stars.includes(i)) {
-            if (i >= 10) {
+            if (i >= this.props.stars[0]) {
               this.drawStar(
                 ctx,
                 this.width - 17 * this.props.scale,
                 verticalPosition
               );
             }
-            if (i >= 20) {
+            if (i >= this.props.stars[1]) {
               this.drawStar(
                 ctx,
                 this.width - 29 * this.props.scale,
                 verticalPosition
               );
             }
-            if (i >= 30) {
+            if (i >= this.props.stars[2]) {
               this.drawStar(
                 ctx,
                 this.width - 41 * this.props.scale,

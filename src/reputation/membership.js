@@ -12,13 +12,13 @@ module.exports = CreateReactClass({
 
   render: function() {
     let text = "member";
-    if (this.props.reputation > this.props.stars[0]) {
+    if (this.props.reputation >= this.props.stars[0]) {
       text = "established";
     }
-    if (this.props.reputation > this.props.stars[1]) {
+    if (this.props.reputation >= this.props.stars[1]) {
       text = "recommended";
     }
-    if (this.props.reputation > this.props.stars[2]) {
+    if (this.props.reputation >= this.props.stars[2]) {
       text = "acclaimed";
     }
     return <div className="reputation-membership">{text}</div>;

@@ -13,6 +13,8 @@ let CreateReactClass = require("create-react-class");
 // let Stars = require("./reputation/stars");
 // let Stars = require("./reputation/animatedstars");
 let Dashboard = require("./reputation/dashboard");
+let Data = require("./data");
+let HistoryData = require("./historydata");
 
 module.exports = CreateReactClass({
   // getQueryVariable: function(variable) {
@@ -27,87 +29,44 @@ module.exports = CreateReactClass({
   //   return false;
   // },
 
+  getInitialState: function() {
+    return {};
+  },
+
+  updateData: function(data) {
+    this.setState(data);
+  },
+
   render: function() {
     // let reputation = parseFloat(this.getQueryVariable("r"));
 
-    let reputationValues = [
-      1,
-      2,
-      2,
-      4,
-      3,
-      4,
-      4,
-      3,
-      4,
-      4,
-      5,
-      5,
-      4,
-      6,
-      5,
-      5,
-      6,
-      6,
-      10,
-      12,
-      12,
-      13,
-      12,
-      13,
-      20,
-      22,
-      22.5,
-      27,
-      26,
-      26.5
-    ];
-    let activityValues = [
-      1,
-      2,
-      3,
-      1,
-      2,
-      3,
-      1,
-      2,
-      3,
-      1,
-      2,
-      3,
-      1,
-      2,
-      3,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      15,
-      17,
-      18,
-      19,
-      20,
-      30,
-      15,
-      32,
-      18
-    ];
     return (
-      <div className="container">
-        {/* <Stars stars={2} /> */}
-        <Dashboard
-          title="David Jones"
-          time={600}
-          delay={0}
-          reputation={26.5}
-          trust={30}
-          respect={15}
-          reputationValues={reputationValues}
-          activityValues={activityValues}
-          avatarUrl="/avatar-tr.png"
-        />
+      <div className="page">
+        <div className="section ux">
+          <h1>UX</h1>
+          <div className="container">
+            <Dashboard
+              title={this.state.name}
+              time={600}
+              delay={600}
+              reputation={this.state.reputation}
+              trust={this.state.trust}
+              respect={this.state.respect}
+              stars={this.state.stars}
+              reputationValues={this.state.reputationValues}
+              activityValues={this.state.activityValues}
+              avatarUrl="/avatar-tr.png"
+            />
+          </div>
+        </div>
+        <div className="section variables">
+          <h1>Variables</h1>
+          <Data onChange={this.updateData} />
+        </div>
+        <div className="section historicals">
+          <h1>Historicals</h1>
+          <HistoryData onChange={this.updateData} />
+        </div>
       </div>
     );
   }

@@ -37,6 +37,17 @@ module.exports = CreateReactClass({
     cancelAnimationFrame(this.rAF);
   },
 
+  componentDidUpdate: function() {
+    if (this.rAF === null) {
+      this.setState({
+        stars: 0,
+        lastFrame: null,
+        delayed: 0
+      });
+      this.rAF = requestAnimationFrame(this.updateAnimationState);
+    }
+  },
+
   updateAnimationState: function(timestamp) {
     let newStars = this.state.stars;
     let progress = 0;
@@ -52,7 +63,6 @@ module.exports = CreateReactClass({
       }
     }
 
-    console.log("stars:" + newStars);
     this.setState({
       stars: newStars,
       lastFrame: timestamp,
@@ -62,6 +72,8 @@ module.exports = CreateReactClass({
     // only request new frame if we haven't finished
     if (newStars <= this.props.stars) {
       this.rAF = requestAnimationFrame(this.updateAnimationState);
+    } else {
+      this.rAF = null;
     }
   },
 

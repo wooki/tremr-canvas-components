@@ -28,6 +28,17 @@ module.exports = CreateReactClass({
     cancelAnimationFrame(this.rAF);
   },
 
+  componentDidUpdate: function() {
+    if (this.rAF === null) {
+      this.setState({
+        reputation: 0,
+        lastFrame: null,
+        delayed: 0
+      });
+      this.rAF = requestAnimationFrame(this.updateAnimationState);
+    }
+  },
+
   updateAnimationState: function(timestamp) {
     // console.log("x:" + timestamp);
     let newReputation = this.state.reputation;
@@ -53,6 +64,8 @@ module.exports = CreateReactClass({
     // only request new frame if we haven't finished
     if (newReputation <= this.props.reputation) {
       this.rAF = requestAnimationFrame(this.updateAnimationState);
+    } else {
+      this.rAF = null;
     }
   },
 

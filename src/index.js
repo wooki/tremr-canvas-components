@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./styles.scss";
 
 let React = require("react");
 let ReactDOM = require("react-dom");

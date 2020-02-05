@@ -1,5 +1,4 @@
 let React = require("react");
-let ReactDOM = require("react-dom");
 let CreateReactClass = require("create-react-class");
 let Gauge = require("./gauge");
 
@@ -12,7 +11,8 @@ module.exports = CreateReactClass({
       delay: 0,
       scale: 1,
       icon: "shield",
-      color: "#379DE8"
+      color: "#379DE8",
+      title: "Trust"
     };
   },
 
@@ -30,6 +30,17 @@ module.exports = CreateReactClass({
 
   componentWillUnmount: function() {
     cancelAnimationFrame(this.rAF);
+  },
+
+  componentDidUpdate: function() {
+    if (this.rAF === null) {
+      this.setState({
+        percent: 0,
+        lastFrame: null,
+        delayed: 0
+      });
+      this.rAF = requestAnimationFrame(this.updateAnimationState);
+    }
   },
 
   updateAnimationState: function(timestamp) {
@@ -60,6 +71,8 @@ module.exports = CreateReactClass({
       (this.props.percent < 0 && newPercent > this.props.percent)
     ) {
       this.rAF = requestAnimationFrame(this.updateAnimationState);
+    } else {
+      this.rAF = null;
     }
   },
 
@@ -76,6 +89,7 @@ module.exports = CreateReactClass({
         icon={this.props.icon}
         height={this.state.height}
         width={this.state.width}
+        title={this.props.title}
       />
     );
   }

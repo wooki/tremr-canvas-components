@@ -43,7 +43,7 @@ module.exports = CreateReactClass({
 
     // sort out some variables for sizes
     let spaceAroundMiddleStar = 2;
-    let starWidth = 28;
+    let starWidth = 28 * this.props.scale;
     let halfStarWidth = starWidth / 2;
     let centreHeight = this.height / 2;
     let centreWidth = this.width / 2;
